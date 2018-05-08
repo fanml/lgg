@@ -14,16 +14,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author weikeqin@bonc.com.cn
+ * @author fml@bonc.com.cn
  * @version V1.0
  * @date 2018-05-07 21:01
  */
 @Slf4j
-public class CrawlerNBATest {
+public  class CrawlerNBATest {
     
     @Test
     public void test2(){
-        
+
         for(int i = 65; i <= 90; i++){
                 char ascii = (char) i;
                 //log.info("{}  {}",i, a);
@@ -36,9 +36,9 @@ public class CrawlerNBATest {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-    
+
         }
-        
+
     }
     
     
@@ -48,7 +48,7 @@ public class CrawlerNBATest {
      * @param url
      * @return
      */
-    public String testCrawler(String url){
+    public static String testCrawler(String url){
     
         //String url = "http://china.nba.com/playerindex/";
     

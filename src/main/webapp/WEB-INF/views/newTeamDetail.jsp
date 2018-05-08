@@ -70,8 +70,8 @@
 
                 <div class="nav_box">
                     <ul class="nav_list" id="nav_list">
-                        <li><a href="javascript:void(0);" onclick="play()" id="playbtn" class="btn_sound"></a></li>
-                        <li><a href="http://localhost:8080/dream/toAllTeamGis">主页</a></li>
+                        <li><a href="http://localhost:8080/dream/toAllPlayer">所有球员</a></li>
+                        <li><a href="http://localhost:8080/dream/toAllTeamGis">所有球队</a></li>
                         <li><a href="http://localhost:8080/dream/toTeamSchedule?teamId=${teamId}">赛季赛程</a></li>
                     </ul>
                     <span class="ic_line" id="h_line"></span>

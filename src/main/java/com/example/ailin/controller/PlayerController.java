@@ -1,5 +1,6 @@
 package com.example.ailin.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.ailin.service.PlayerService;
 
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
+
+import static com.example.ailin.tool.CrawlerNBATest.testCrawler;
 
 @Controller
 public class PlayerController {
@@ -75,5 +78,22 @@ public class PlayerController {
                 result="success";
         }
         return result+" "+" "+grade+"分";
+    }
+//    爬虫 所有球员
+    @RequestMapping("toAllPlayer")
+    public String toAllPlayer(){
+        for(int i = 65; i <= 90; i++){
+            char ascii = (char) i;
+            String url = "http://china.nba.com/static/data/league/playerlist_"+ascii+".json";
+            String html=testCrawler(url);
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return "allPlayer";
     }
 }
