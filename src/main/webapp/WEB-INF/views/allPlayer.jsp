@@ -33,19 +33,27 @@
     <img src="images/big_7.jpg"/>
     <img src="images/big_8.jpg"/>
     <img src="images/big_9.jpg"/>
+    <img src="images/big_2.jpg"/>
+    <img src="images/big_2.jpg"/>
+    <img src="images/big_3.jpg"/>
 </div>
 
 <div class="popup"></div>
 
 <div class="show">
     <img class="big" src="images/big_1.jpg"/>
+    <div>哈哈哈哈</div>
     <img class="left" src="images/left.png"/>
     <img class="right" src="images/right.png"/>
 </div>
 
 <script src="js/jquery-3.3.1.js" type="text/javascript"></script>
 <script type="text/javascript">
+
     $(function(){
+        var list=${list};
+        console.log(list)
+        <%--切换图片--%>
         var bigImg='';
         var _index=0;
         $(".popup").click(function(){

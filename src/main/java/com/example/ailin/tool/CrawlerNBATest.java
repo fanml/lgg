@@ -81,7 +81,7 @@ public  class CrawlerNBATest {
         } catch (IOException e) {
             log.error("处理响应出错：{}", e.toString());
         }
-        log.info("\r\n{}", html);
+//        log.info("\r\n{}", html);
     
         return html;
     }

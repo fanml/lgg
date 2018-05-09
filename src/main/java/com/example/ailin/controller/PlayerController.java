@@ -7,6 +7,7 @@ import com.example.ailin.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -80,13 +83,25 @@ public class PlayerController {
         return result+" "+" "+grade+"分";
     }
 //    爬虫 所有球员
+    public static List<Object> playerTrueList;
     @RequestMapping("toAllPlayer")
-    public String toAllPlayer(){
+    public String toAllPlayer(ModelMap modelMap){
+//        for(int i = 65; i <= 90; i++){
+        if(CollectionUtils.isEmpty(playerTrueList)){
+            getAllPlayerTrue();
+        }
+        modelMap.addAttribute("list",playerTrueList);
+        return "allPlayer";
+    }
+
+    private  void getAllPlayerTrue(){
+        playerTrueList=new ArrayList<>();
         for(int i = 65; i <= 90; i++){
             char ascii = (char) i;
             String url = "http://china.nba.com/static/data/league/playerlist_"+ascii+".json";
             String html=testCrawler(url);
-
+            playerTrueList.add(html);
+            System.out.println("111111");
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -94,6 +109,5 @@ public class PlayerController {
             }
 
         }
-        return "allPlayer";
     }
 }
