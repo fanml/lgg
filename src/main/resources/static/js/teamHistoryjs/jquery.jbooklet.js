@@ -986,8 +986,8 @@
 
   // define default options
   $.fn.booklet.defaults = {
-    width: 600, // container width, px
-    height: 400, // container height, px
+    width: 900, // container width, px
+    height: 600, // container height, px
     speed: 1000, // speed of the transition between pages
     startingPage: 0, // index of the first page to be displayed
     easing: 'easeInOutQuad', // easing method for complete transition

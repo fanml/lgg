@@ -60,6 +60,12 @@
         //        }
         //    })
         //    }
+    $(function () {
+        $("#teamImg").click(function () {
+            $(location).attr('href','http://localhost:8080/dream/teamHistory?teamId=${teamId}');
+        })
+    })
+
     </script>
 </head>
 <body>
@@ -90,7 +96,7 @@
                               <h1>${championMap.value}</h1>
                           </c:if>
                           <c:if test="${championMap.key eq'球队英文名称'}">
-                             <img src="img/${championMap.value}.jpg" width="100">
+                             <img src="img/${championMap.value}.jpg" width="100" id="teamImg">
                           </c:if>
                       </c:forEach>
                       </c:forEach>

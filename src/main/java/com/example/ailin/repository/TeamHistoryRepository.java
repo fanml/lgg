@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface TeamHistoryRepository extends CrudRepository<TeamHistory, Integer>,
         JpaSpecificationExecutor<TeamHistory> {
-    @Query(nativeQuery = true,value = "SELECT t.* FROM team_history t WHERE t.team_id=?1")
+    @Query(nativeQuery = true,value = "SELECT t.* FROM team_history t WHERE t.team_id=?1 ORDER BY t.interval")
     List<TeamHistory>  findTeamHistoriesByTeamId(Integer teamId);
 }

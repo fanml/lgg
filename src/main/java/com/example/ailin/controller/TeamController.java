@@ -24,7 +24,6 @@ public class TeamController {
                          @RequestParam(value = "season",defaultValue ="1") String season,
                            ModelMap model){
          Map<String,List<Map<String,Object>>>  resultMap=teamService.getTeamAllDetailInformation(teamId,season);
-        System.out.println(resultMap);
 //         model.addAttribute("map",JSONObject.toJSON(resultMap));
         model.addAttribute("map",resultMap);
         model.addAttribute("teamId",teamId);
@@ -53,10 +52,9 @@ public class TeamController {
                                ModelMap modelMap){
          Map<String,Object> map=teamService.getTeamById(teamId);
          List<Map<String,Object>> list=teamService.getTeamHistoryById(teamId);
-         System.out.println("map"+map);
-         System.out.println("list"+list);
-         modelMap.addAttribute("map",map);
-         modelMap.addAttribute("list",list);
+         modelMap.addAttribute("teamId",teamId);
+         modelMap.addAttribute("map",JSONObject.toJSON(map));
+         modelMap.addAttribute("list",JSONObject.toJSON(list));
          return "teamHistory";
      }
 
