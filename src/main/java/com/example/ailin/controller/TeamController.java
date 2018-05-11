@@ -2,6 +2,8 @@ package com.example.ailin.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.ailin.service.TeamService;
+import com.example.ailin.tool.LogOperateType;
+import com.example.ailin.tool.OperateLog;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,7 @@ public class TeamController {
                          @RequestParam(value = "season",defaultValue ="1") String season,
                            ModelMap model){
          Map<String,List<Map<String,Object>>>  resultMap=teamService.getTeamAllDetailInformation(teamId,season);
-//         model.addAttribute("map",JSONObject.toJSON(resultMap));
+        OperateLog.logTeamDetail(LogOperateType.CHECK,teamId,season);
         model.addAttribute("map",resultMap);
         model.addAttribute("teamId",teamId);
         return "newTeamDetail";
@@ -35,6 +37,7 @@ public class TeamController {
                                  @RequestParam(value = "startTime",defaultValue = "2017-8-1") String startTime,
                                  @RequestParam(value = "endTime",defaultValue = "2018-8-1") String endTime,
                                  ModelMap model){
+        OperateLog.logTeamSchedule(LogOperateType.CHECK,teamId,startTime,endTime);
         List<Map<String,Double>> resultList=teamService.getTeamScheduleByTeamId(teamId,startTime,endTime);
         model.addAttribute("list", JSONObject.toJSONString(resultList));
         return "teamTrail";
@@ -42,6 +45,7 @@ public class TeamController {
     //toAllteamGis
     @RequestMapping(value = "toAllTeamGis")
     public String toAllTeamGis(ModelMap model){
+        OperateLog.AllTeamGis(LogOperateType.CHECK);
         List<Map<String,Object>> list=teamService.findAllTeam();
         model.addAttribute("list",JSONObject.toJSONString(list));
         return "allTeamGis";
@@ -50,6 +54,7 @@ public class TeamController {
      @RequestMapping("teamHistory")
      public String teamHistory(@RequestParam(value = "teamId") Integer teamId,
                                ModelMap modelMap){
+         OperateLog.TeamHistory(LogOperateType.CHECK,teamId);
          Map<String,Object> map=teamService.getTeamById(teamId);
          List<Map<String,Object>> list=teamService.getTeamHistoryById(teamId);
          modelMap.addAttribute("teamId",teamId);

@@ -3,6 +3,8 @@ package com.example.ailin.controller;
 import com.example.ailin.entity.Users;
 import com.example.ailin.service.UserService;
 import com.example.ailin.tool.CaptchaUtil;
+import com.example.ailin.tool.LogOperateType;
+import com.example.ailin.tool.OperateLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -42,12 +44,14 @@ public class UsersController {
                         @RequestParam(value = "code") String code,
                         HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(60*60);
         String codeResult = checkCode(session, code);
         String mess = "";
         String jiaPwdMD5=convertMD5(pwdMD5);
         boolean result = userService.login(username, jiaPwdMD5);
         if (result && codeResult.equals("success")) {
             session.setAttribute("username", username);
+            OperateLog.logLogin(LogOperateType.LOGIN);
             if (savePwd.equals("yes")) {
                 Cookie usernameCookie = new Cookie("username", username);
                 usernameCookie.setMaxAge(60 * 60 * 24 * 3);
@@ -125,6 +129,7 @@ public class UsersController {
                            ) {
         String jiaPwdMD5=convertMD5(pwdMD5);
         boolean result=userService.addUser(username,jiaPwdMD5,idCard,null,null,email);
+        OperateLog.logRegister(LogOperateType.REGISTER,username);
         return "redirect:toSecretQuestion?type=register&username="+username;
     }
 //    加密算法

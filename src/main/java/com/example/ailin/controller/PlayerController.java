@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.ailin.service.PlayerService;
 
+import com.example.ailin.tool.LogOperateType;
+import com.example.ailin.tool.OperateLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,6 +38,7 @@ public class PlayerController {
         if(nowPlayerId==0){
             nowPlayerId=playerService.getPlayerIdByName(playerName);
         }
+        OperateLog.playerAssess(LogOperateType.CHECK,nowPlayerId,"详细信息");
         Map<String,Object> resultMap=playerService.getIcon(nowPlayerId,season);
         modelMap.addAttribute("map", JSONObject.toJSON(resultMap));
         return "playerAssess";
@@ -56,6 +59,7 @@ public class PlayerController {
         if(nowPlayerId==0){
             nowPlayerId=playerService.getPlayerIdByName(playerName);
         }
+        OperateLog.playerAssess(LogOperateType.CHECK,nowPlayerId,"综合评分");
         Map<String,Object> resultMap=playerService.getGrade(nowPlayerId);
         resultMap.put("playerId",nowPlayerId);
         modelMap.addAttribute("map", JSONObject.toJSON(resultMap));
@@ -75,6 +79,7 @@ public class PlayerController {
         String result="error";
         HttpSession session=request.getSession();
         String username=(String)session.getAttribute("username");
+        OperateLog.setGread(LogOperateType.ADD,grade,playerId);
         if(!StringUtils.isEmpty(grade)&&!StringUtils.isEmpty(username)){
             boolean b=playerService.setGrade(username,grade,playerId);
             if(b)
@@ -87,6 +92,7 @@ public class PlayerController {
     @RequestMapping("toAllPlayer")
     public String toAllPlayer(ModelMap modelMap){
 //        for(int i = 65; i <= 90; i++){
+        OperateLog.allPlayer(LogOperateType.CHECK);
         if(CollectionUtils.isEmpty(playerTrueList)){
             getAllPlayerTrue();
         }
@@ -101,7 +107,6 @@ public class PlayerController {
             String url = "http://china.nba.com/static/data/league/playerlist_"+ascii+".json";
             String html=testCrawler(url);
             playerTrueList.add(html);
-            System.out.println("111111");
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {

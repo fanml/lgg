@@ -3,6 +3,8 @@ package com.example.ailin.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.ailin.entity.SecretQuestion;
 import com.example.ailin.service.UserService;
+import com.example.ailin.tool.LogOperateType;
+import com.example.ailin.tool.OperateLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +42,7 @@ public class UsersSecretQuestionController {
                                  @RequestParam(value = "questionId") Integer questionId,
                                  @RequestParam(value = "answer") String answer
                                 ){
+        OperateLog.answerValidate(LogOperateType.VALIDATE,username);
         boolean result=userService.answerValidate(username,questionId,answer);
         return JSONObject.toJSONString(result);
     }
@@ -52,15 +55,13 @@ public class UsersSecretQuestionController {
                             @RequestParam(value = "answer2") String answer2,
                             @RequestParam(value = "q3") Integer question3,
                             @RequestParam(value = "answer3") String answer3){
+        OperateLog.addAnswer(LogOperateType.ADD,username);
         boolean result=userService.addAnswer(username,question1,answer1,question2,answer2,question3,answer3);
-
-        System.out.println(question1+" "+question2+" "+question3);
         String mess="注册失败";
         if(result){
             mess="注册成功";
-            System.out.println(mess);
         }
-           return "index";
+           return "redirect：index";
     }
 
 }
