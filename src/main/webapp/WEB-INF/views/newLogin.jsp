@@ -76,6 +76,7 @@
 <script src="js/jquery.md5.js" type="text/javascript"></script>
 <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
     <p>NBA情报分析--广大球迷的新平台</p>
+    <p><a href="http://localhost:8080/dream/admin/login">管路员登陆</a></p>
     <%--<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>--%>
 </div>
 </body>
