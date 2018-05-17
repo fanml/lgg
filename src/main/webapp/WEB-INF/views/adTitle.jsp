@@ -14,7 +14,7 @@
 <div>
     <ul>
         <li><a href="adLog">查看日志</a></li>
-        <li><a>用户管理</a></li>
+        <li><a href="adUser">用户管理</a></li>
         <li><a>球员管理</a></li>
         <li><a>球队管理</a></li>
     </ul>

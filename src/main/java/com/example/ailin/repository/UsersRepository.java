@@ -15,4 +15,7 @@ public interface UsersRepository extends CrudRepository<Users, Integer>,
 
     List<Users> findUsersByUserName(String username);
 
+    @Query(nativeQuery = true,value = "SELECT u.* FROM users u ")
+    List<Users> findAllUsers();
+
 }

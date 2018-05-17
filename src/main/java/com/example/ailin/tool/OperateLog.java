@@ -70,7 +70,7 @@ public class OperateLog {
         return  time;
     }
     private static void save(String operate,String ip,String userName,String time,String object,String logDetaile){
-        Log log=new Log(userName,operate,time,object,logDetaile,ip);
+        Log log=new Log(userName,operate,time,object,logDetaile,ip,1);
         logRepository.save(log);
     }
 

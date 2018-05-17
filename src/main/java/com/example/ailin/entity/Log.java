@@ -36,12 +36,16 @@ public class Log {
     @Column(name = "ip")
     private String ip;
 
-    public Log(String userName,String operate,String time,String object,String logDetaile, String ip){
+    @Column(name = "is_delete")
+    private Integer isDelete;
+
+    public Log(String userName,String operate,String time,String object,String logDetaile, String ip,Integer isDelete){
         this.userName=userName;
         this.operate=operate;
         this.time=time;
         this.object=object;
         this.logDetaile=logDetaile;
         this.ip=ip;
+        this.isDelete=isDelete;
     }
 }

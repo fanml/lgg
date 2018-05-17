@@ -2,14 +2,13 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2018/5/16 0016
-  Time: 14:53
+  Time: 21:33
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>adLog</title>
-    <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.js" type="text/javascript"></script>
+    <title>Title</title><script src="${pageContext.request.contextPath}/js/jquery-3.3.1.js" type="text/javascript"></script>
     <link rel="stylesheet" href="css/all.css">
     <style>
         * { padding: 0; margin: 0; }
@@ -69,12 +68,11 @@
 
                 //往行里面追加 td单元格
                 $trTemp.append("<td>"+ data[i].userName +"</td>");
-                $trTemp.append("<td>"+ data[i].operate +"</td>");
-                $trTemp.append("<td>"+ data[i].ip +"</td>");
-                $trTemp.append("<td>"+ data[i].time +"</td>");
-                $trTemp.append("<td>"+ data[i].object +"</td>");
-                $trTemp.append("<td>"+ data[i].logDetail +"</td>");
-                $trTemp.append("<td>"+ "<a href='deleteLog?logId="+data[i].id+"'>删除</a>"+"</td>");
+                $trTemp.append("<td>"+ data[i].idCard +"</td>");
+                $trTemp.append("<td>"+ data[i].telephone +"</td>");
+                $trTemp.append("<td>"+ data[i].email +"</td>");
+                $trTemp.append("<td>"+ data[i].location +"</td>");
+                $trTemp.append("<td>"+ "<a href='deleteUsers?userId="+data[i].id+"'>删除</a>"+"</td>");
                 // $("#J_TbData").append($trTemp);
                 $trTemp.appendTo("#J_TbData");
             }
@@ -88,12 +86,11 @@
         <thead>
         <tr>
             <th>用户名</th>
-            <th>操作类型</th>
-            <th>ip</th>
-            <th>时间</th>
-            <th>操作对象</th>
-            <th>详细说明</th>
-            <th><a href="deleteLog?logId=all">删除</a></th>
+            <th>证件号码</th>
+            <th>联系方式</th>
+            <th>e-mail</th>
+            <th>地址</th>
+            <th><a href="deleteUsers?userId=all">删除</a></th>
         </tr>
         </thead>
         <tbody id="J_TbData">

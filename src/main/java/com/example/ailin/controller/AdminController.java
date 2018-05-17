@@ -40,14 +40,28 @@ public class AdminController {
     @RequestMapping(value = "/adLog")
     public String adLog(ModelMap modelMap){
         List<Map<String,Object>> resultList=logService.getAllLog();
-        if(!CollectionUtils.isEmpty(resultList)){
-            modelMap.addAttribute("list", JSONObject.toJSON(resultList));
-            System.out.println(JSONObject.toJSON(resultList));
-            return "adLog";
-        }
+        modelMap.addAttribute("list", JSONObject.toJSON(resultList));
+        return "adLog";
 
-        else
-            return "adError";
+    }
+//    删除日志
+    @RequestMapping(value = "deleteLog")
+    public String deleteLog(@RequestParam(value = "logId") String logId){
+          logService.deleteLogById(logId);
+          return "redirect:adLog";
+    }
+//    跳转用户管理页面
+    @RequestMapping(value = "/adUser")
+    public String adUser(ModelMap modelMap){
+        List<Map<String,Object>> resultList=logService.getAllUsers();
+        modelMap.addAttribute("list", JSONObject.toJSON(resultList));
+        return "adUser";
+    }
+//    删除用户
+    @RequestMapping(value = "/deleteUsers")
+    public String deleteUsers(@RequestParam(value = "userId") String userId){
+        logService.deleteUsersById(userId);
+        return "redirect:adUser";
     }
 }
 
